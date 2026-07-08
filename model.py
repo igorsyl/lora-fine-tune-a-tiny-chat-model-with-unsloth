@@ -130,11 +130,22 @@ def count_tokens(input_ids):
     # return the length of the input_ids sequence
     return len(input_ids)
 
-# Step 15 - build_training_arguments (not yet solved)
-# TODO: implement
+# Step 15 - build_training_arguments
+def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=2e-4):
+    """Return featherweight TrainingArguments for the SFT run."""
+    # build TrainingArguments with batch size 1, given max_steps, given lr, bf16 or fp16.
+    import transformers
+    import torch
+    bf16 = torch.cuda.is_bf16_supported()
+    fp16 = not bf16
+    return transformers.TrainingArguments(per_device_train_batch_size=1, gradient_accumulation_steps=1, max_steps=max_steps, learning_rate=learning_rate, output_dir=output_dir, bf16=bf16, fp16=fp16, logging_steps=1, optim='adamw_8bit')
 
-# Step 16 - build_sft_trainer (not yet solved)
-# TODO: implement
+# Step 16 - build_sft_trainer
+def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=256):
+    """Construct a trl SFTTrainer over dataset['text'] ready to .train()."""
+    # wire model, tokenizer, dataset, and training_args into an SFTTrainer
+    impor trl
+    return trl.SFTTrainer(model=model, tokenizer=tokenizer, train_dataset=dataset, dataset_text_field='text', max_seq_length=max_seq_length, args=training_args, packing=False)
 
 # Step 17 - run_sft_training (not yet solved)
 # TODO: implement
