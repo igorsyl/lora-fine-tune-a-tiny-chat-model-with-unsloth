@@ -67,8 +67,37 @@ def trainable_fraction(trainable_count, total_count):
     # return the fraction of parameters that are trainable.
     return trainable_count / total_count
 
-# Step 9 - build_instruction_examples (not yet solved)
-# TODO: implement
+# Step 9 - build_instruction_examples
+def build_instruction_examples():
+    """Return a small list of {'instruction', 'response'} dicts for SFT."""
+    # return a tiny hand-written list of instruction/response example dicts.
+
+    return [
+        {
+            "instruction": "Explain why the sky looks blue to a 5-year-old.",
+            "response": "The air is full of tiny particles that act like a bunch of little mirrors. When the sunlight hits them, it bounces around, but the blue light bounces the most. So when you look up, you see all that scattered blue light!"
+        },
+        {
+            "instruction": "What is the capital of France?",
+            "response": "The capital of France is Paris."
+        },
+        {
+            "instruction": "Write a short, one-sentence poem about a rainy afternoon.",
+            "response": "Gray clouds tap gently on the glass while the world outside slows down to a soft, rhythmic hum."
+        },
+        {
+            "instruction": "Fix the grammatical error in this sentence: 'She don't like going to the store.'",
+            "response": "The corrected sentence is: 'She doesn't like going to the store.'"
+        },
+        {
+            "instruction": "Is a tomato a fruit or a vegetable?",
+            "response": "Botanically speaking, a tomato is a fruit because it grows from a flower and contains seeds. However, in cooking, it is generally treated and prepared as a vegetable."
+        },
+        {
+            "instruction": "Provide a quick tip for waking up earlier in the morning.",
+            "response": "Put your alarm clock or phone across the room so you are forced to physically get out of bed to turn it off."
+        }
+    ]
 
 # Step 10 - format_instruction_example (not yet solved)
 # TODO: implement
