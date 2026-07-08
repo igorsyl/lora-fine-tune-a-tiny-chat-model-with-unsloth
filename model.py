@@ -122,7 +122,7 @@ def build_text_dataset(texts):
 def tokenize_text(tokenizer, text):
     """Tokenize a single string and return a list[int] of input ids."""
     # call the tokenizer on text and return its input_ids as a plain list
-    return tokenizer(text)
+    return tokenizer(text)['input_ids']
 
 # Step 14 - count_tokens
 def count_tokens(input_ids):
