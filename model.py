@@ -17,8 +17,11 @@ def load_base_model_and_tokenizer(model_name='unsloth/Qwen2.5-0.5B-Instruct-bnb-
     # call FastLanguageModel.from_pretrained with 4-bit loading and return (model, tokenizer)
     return unsloth.FastLanguageModel.from_pretrained(model_name, max_seq_length)
 
-# Step 2 - count_total_parameters (not yet solved)
-# TODO: implement
+# Step 2 - count_total_parameters
+def count_total_parameters(model):
+    """Return the total number of parameters in `model` as a Python int."""
+    # sum p.numel() over every parameter tensor in the module
+    return sum(p.numel() for p in model.parameters())
 
 # Step 3 - is_model_4bit_quantized (not yet solved)
 # TODO: implement
