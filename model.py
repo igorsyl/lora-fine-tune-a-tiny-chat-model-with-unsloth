@@ -144,18 +144,35 @@ def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=
 def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=256):
     """Construct a trl SFTTrainer over dataset['text'] ready to .train()."""
     # wire model, tokenizer, dataset, and training_args into an SFTTrainer
-    impor trl
+    import trl
     return trl.SFTTrainer(model=model, tokenizer=tokenizer, train_dataset=dataset, dataset_text_field='text', max_seq_length=max_seq_length, args=training_args, packing=False)
 
-# Step 17 - run_sft_training (not yet solved)
-# TODO: implement
+# Step 17 - run_sft_training
+def run_sft_training(trainer):
+    """Run a few SFT steps and return the final training loss as a float."""
+    # drive the trainer through its short optimization run and return the final loss
+    train_output = trainer.train()
+    return train_output.training_loss
 
-# Step 18 - switch_to_inference_mode (not yet solved)
-# TODO: implement
+# Step 18 - switch_to_inference_mode
+def switch_to_inference_mode(model):
+    """Switch the LoRA-tuned model into Unsloth's fast inference mode and return it."""
+    # call the Unsloth helper that prepares the model for fast generation
+    import unsloth
+    unsloth.FastLanguageModel.for_inference(model)
+    return model
 
-# Step 19 - build_chat_prompt (not yet solved)
-# TODO: implement
+# Step 19 - build_chat_prompt
+def build_chat_prompt(tokenizer, instruction):
+    """Return a chat-template prompt string ready for assistant generation."""
+    # wrap the instruction as a user turn and produce the assistant-generation prompt string
+    return tokenizer.apply_chat_template(instruction, tokenize=False, add_generation_prompt=True)
 
-# Step 20 - generate_reply (not yet solved)
-# TODO: implement
+# Step 20 - generate_reply
+def generate_reply(model, tokenizer, prompt, max_new_tokens=32):
+    """Greedy-generate a reply for `prompt` and return the decoded text."""
+    # tokenize prompt, run model.generate with do_sample=False, decode new tokens only
+    input_ids = tokenizer(prompt, return_tensors='pt')
+    output_ids = model.generate(input_ids, do_sample=False)
+    return tokenizer.decode(output_ids, skip_special_tokens=True, max_new_tokens=max_new_tokens)
 

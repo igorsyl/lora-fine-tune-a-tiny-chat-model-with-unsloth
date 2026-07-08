@@ -26,10 +26,10 @@ python scaffold.py
 - [x] **14.** count_tokens
 - [x] **15.** build_training_arguments
 - [x] **16.** build_sft_trainer
-- [ ] **17.** run_sft_training
-- [ ] **18.** switch_to_inference_mode
-- [ ] **19.** build_chat_prompt
-- [ ] **20.** generate_reply
+- [x] **17.** run_sft_training
+- [x] **18.** switch_to_inference_mode
+- [x] **19.** build_chat_prompt
+- [x] **20.** generate_reply
 
 ---
 
