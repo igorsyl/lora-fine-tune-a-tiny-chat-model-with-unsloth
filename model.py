@@ -23,8 +23,15 @@ def count_total_parameters(model):
     # sum p.numel() over every parameter tensor in the module
     return sum(p.numel() for p in model.parameters())
 
-# Step 3 - is_model_4bit_quantized (not yet solved)
-# TODO: implement
+# Step 3 - is_model_4bit_quantized
+def is_model_4bit_quantized(model):
+    """Return True if any submodule of `model` is a bitsandbytes 4-bit linear layer."""
+    # walk the model's submodules and check for a bitsandbytes Linear4bit instance
+    import bitsandbytes
+    for module in model.modules():
+        if isinstance(module, bitsandbytes.nn.Linear4bit):
+            return True
+    return False
 
 # Step 4 - ensure_pad_token (not yet solved)
 # TODO: implement
